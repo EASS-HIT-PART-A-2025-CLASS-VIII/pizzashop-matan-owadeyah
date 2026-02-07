@@ -1,63 +1,55 @@
-# Pizza Order API - EX1
+# 🍕 Pizza Order System - EX3 (Full-Stack Microservices)
 
-This is a simple FastAPI application for managing pizza orders, running inside a Docker container.
+**Student Name:** Matan Owadeyah  
+**ID:** 322659079
 
-## Project Structure
+## 🚀 Project Overview
 
-- `main.py`: The FastAPI application with CRUD endpoints.
-- `test_main.py`: Pytest suite for testing the API endpoints.
-- `Dockerfile`: Instructions to containerize the application.
-- `requirements.txt`: List of required Python packages.
+This project is a distributed pizza ordering system built with a Microservices architecture. It includes a FastAPI backend, an Nginx frontend, and an asynchronous task processing system using Redis and a background Worker.
 
-## How to build the image
+### Key Features (EX3 Enhancements):
 
-docker build -t pizza-app .
+- **Microservices Orchestration**: All services run seamlessly using Docker Compose.
+- **Asynchronous Processing**: Orders are sent to a **Redis** queue and processed by a dedicated **Worker** service.
+- **Security**: Protected endpoints using **JWT (JSON Web Tokens)** authentication.
+- **Advanced Export**: Detailed CSV export with **UTF-8-SIG** encoding for perfect Hebrew support in Excel.
 
-## How to run the container
+---
 
-docker run -p 8000:8000 pizza-app
+## 🏗️ Project Structure
 
-## API Endpoints
+- **/backend**: FastAPI server (Port 8000) - Handles API logic, Auth, and DB.
+- **/frontend**: Nginx web server (Port 8080) - User interface for placing orders.
+- **Redis**: Message broker for task management.
+- **Worker**: Background service that processes order tasks from Redis.
+- **Database**: SQLite (SQLModel) for persistent storage.
 
-- **GET /items**: Returns all pizza orders.
-- **POST /items**: Create a new pizza order.
-- **PUT /items/{id}**: Update an existing order.
-- **DELETE /items/{id}**: Remove an order.
+---
 
-## How to Run Tests (Pytest)
+## 🛠️ How to Run
 
-pytest
+The entire system is containerized. To start all services, run:
 
-## Example Call (Using Curl)
+bash
+docker compose up --build
 
-curl -X GET http://127.0.0.1:8000/items
+Accessing the System:
+Frontend (UI): http://localhost:8080
 
-# EX2
+API Documentation (Swagger): http://localhost:8000/docs
 
-## Project Structure
+📡 API Endpoints
+POST /signup: Register a new user.
 
-- **/backend**: FastAPI server (Port 8000)
-- **/frontend**: Nginx web server (Port 8080)
+POST /login: Authenticate and receive a JWT Bearer Token.
 
-## How to Run
+GET /items: Retrieve all orders (Public).
 
-1. **Start Backend**:
+POST /items: Create a new order (Secure - requires JWT).
 
-   - `cd backend`
-   - `docker build -t pizza-backend .`
-   - `docker run -d -p 8000:8000 pizza-backend`
+GET /export-csv: Export all orders to a detailed CSV file (Secure - requires JWT).
 
-2. **Start Frontend**:
-   - `cd frontend`
-   - `docker build -t pizza-frontend .`
-   - `docker run -d -p 8080:80 pizza-frontend`
+🧪 Testing & Validation
+Backend Tests: Run pytest inside the /backend directory.
 
-## Testing
-
-Run `pytest` inside the `/backend` folder to verify the API.
-
-## Features
-
-- View all pizza orders from the database (GET).
-- Add new pizza orders via a web form (POST).
-- Fully containerized environment.
+Asynchronous Logs: Observe the worker logs in the terminal to verify background task processing.
