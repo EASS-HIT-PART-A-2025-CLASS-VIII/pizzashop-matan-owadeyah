@@ -30,7 +30,7 @@ async def worker():
                 _, task_data = task
                 task_str = task_data.decode("utf-8")
                 
-                # מנגנון Retries בסיסי
+                # מנגנון Retries
                 for attempt in range(3):
                     try:
                         await mock_processing(task_str)

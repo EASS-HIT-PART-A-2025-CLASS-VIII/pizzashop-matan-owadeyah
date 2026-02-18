@@ -19,9 +19,8 @@ services:
 
   worker:
     build: ./backend
-    # התיקון: אנחנו אומרים לדוקר לעבוד מתוך תיקיית /app
+
     working_dir: /app
-    # עכשיו פייתון ימצא את scripts/refresh.py בקלות
     command: python scripts/refresh.py
     volumes:
       - ./backend:/app

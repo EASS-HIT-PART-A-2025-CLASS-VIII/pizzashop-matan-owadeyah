@@ -5,7 +5,7 @@ BASE_URL = "http://localhost:8000"
 def run_demo():
     print("--- EX3 Local Demo Script ---")
     
-    # 1. בדיקת בריאות ה-API
+    # בדיקת בריאות ה-API
     try:
         res = requests.get(f"{BASE_URL}/items")
         print(f"API Health Check: {res.status_code} OK")
